@@ -65,15 +65,8 @@ public class App {
 				String[] cmdBits = cmd.split(" ");
 				int id = Integer.parseInt(cmdBits[2]);
 
-				Article foundArticle = null;
-
-				for (Article article : articles) {
-					if (article.id == id) {
-						foundArticle = article;
-						break;
-					}
-				}
-
+				Article foundArticle = getArticleById(id);
+				
 				if (foundArticle == null) {
 					System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
 					continue;
@@ -90,14 +83,7 @@ public class App {
 				String[] cmdBits = cmd.split(" ");
 				int id = Integer.parseInt(cmdBits[2]);
 
-				Article foundArticle = null;
-
-				for (Article article : articles) {
-					if (article.id == id) {
-						foundArticle = article;
-						break;
-					}
-				}
+				Article foundArticle = getArticleById(id);
 
 				if (foundArticle == null) {
 					System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
@@ -120,14 +106,7 @@ public class App {
 				String[] cmdBits = cmd.split(" ");
 				int id = Integer.parseInt(cmdBits[2]);
 
-				Article foundArticle = null;
-
-				for (Article article : articles) {
-					if (article.id == id) {
-						foundArticle = article;
-						break;
-					}
-				}
+				Article foundArticle = getArticleById(id);
 
 				if (foundArticle == null) {
 					System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
@@ -146,6 +125,15 @@ public class App {
 		sc.close();
 
 		System.out.println("== 프로그램 끝 ==");
+	}
+	
+	private Article getArticleById(int id) {
+		for (Article article : articles) {
+			if (article.id == id) {
+				return article;
+			}
+		}
+		return null;
 	}
 	
 	private void makeTestData() {
