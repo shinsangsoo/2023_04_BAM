@@ -30,6 +30,9 @@ public class MemberController extends Controller {
 		case "login":
 			doLogin();
 			break;
+		case "logout":
+			doLogout();
+			break;
 		default: 
 			System.out.println("명령어를 확인해주세요");
 			break;
@@ -116,6 +119,16 @@ public class MemberController extends Controller {
 		
 		System.out.printf("%s님 환영합니다\n", member.name);
 		
+	}
+	
+	private void doLogout() {
+		if (loginedMember == null) {
+			System.out.println("로그인 상태가 아닙니다");
+			return;
+		}
+		
+		loginedMember = null;
+		System.out.println("로그아웃 되었습니다");
 	}
 	
 	private Member getMemberByLoginId(String loginId) {
