@@ -183,7 +183,8 @@ public class ArticleController extends Controller {
 		}
 		return null;
 	}
-
+	
+	@Override
 	public void makeTestData() {
 		System.out.println("테스트용 게시물 데이터 5개 생성");
 		
