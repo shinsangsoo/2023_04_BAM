@@ -7,19 +7,46 @@ import java.util.Scanner;
 import bam.dto.Article;
 import bam.util.Util;
 
-public class ArticleController {
+public class ArticleController extends Controller {
 
 	private List<Article> articles;
 	private Scanner sc;
 	private int lastArticleId;
+	private String cmd;
 	
 	public ArticleController(List<Article> articles, Scanner sc) {
 		this.articles = articles;
 		this.sc = sc;
 		this.lastArticleId = 0;
 	}
+	
+	@Override
+	public void doAction(String cmd, String methodName) {
+		this.cmd = cmd;
+		
+		switch(methodName) {
+		case "write":
+			doWrite();
+			break;
+		case "list":
+			showList();
+			break;
+		case "detail":
+			showDetail();
+			break;
+		case "modify":
+			doModify();
+			break;
+		case "delete":
+			doDelete();
+			break;
+		default: 
+			System.out.println("명령어를 확인해주세요");
+			break;
+		}
+	}
 
-	public void doWrite() {
+	private void doWrite() {
 		System.out.println("== 게시물 작성 ==");
 		int id = lastArticleId + 1;
 		lastArticleId = id;
@@ -35,7 +62,7 @@ public class ArticleController {
 		System.out.printf("%d번 글이 생성되었습니다\n", id);
 	}
 
-	public void showList(String cmd) {
+	private void showList() {
 		if (articles.size() == 0) {
 			System.out.println("존재하는 게시물이 없습니다");
 			return;
@@ -72,8 +99,14 @@ public class ArticleController {
 		}
 	}
 
-	public void showDetail(String cmd) {
+	private void showDetail() {
 		String[] cmdBits = cmd.split(" ");
+		
+		if (cmdBits.length == 2) {
+			System.out.println("명령어를 확인해주세요");
+			return;
+		}
+		
 		int id = Integer.parseInt(cmdBits[2]);
 
 		Article foundArticle = getArticleById(id);
@@ -90,10 +123,17 @@ public class ArticleController {
 		System.out.printf("내용 : %s\n", foundArticle.body);
 	}
 	
-	public void doModify(String cmd) {
+	private void doModify() {
 		String[] cmdBits = cmd.split(" ");
+		
+		if (cmdBits.length == 2) {
+			System.out.println("명령어를 확인해주세요");
+			return;
+		}
+		
 		int id = Integer.parseInt(cmdBits[2]);
 
+		
 		Article foundArticle = getArticleById(id);
 
 		if (foundArticle == null) {
@@ -113,8 +153,14 @@ public class ArticleController {
 		System.out.printf("%d번 게시물이 수정되었습니다\n", id);
 	}
 	
-	public void doDelete(String cmd) {
+	private void doDelete() {
 		String[] cmdBits = cmd.split(" ");
+		
+		if (cmdBits.length == 2) {
+			System.out.println("명령어를 확인해주세요");
+			return;
+		}
+		
 		int id = Integer.parseInt(cmdBits[2]);
 
 		Article foundArticle = getArticleById(id);
@@ -153,4 +199,5 @@ public class ArticleController {
 			articles.add(article);
 		}
 	}
+
 }
