@@ -95,12 +95,12 @@ public class ArticleController extends Controller {
 		}
 		
 		System.out.println("== 게시물 목록 ==");
-		System.out.println("번호	|	제목	|	작성일	");
+		System.out.println("번호	|	제목	|		작성일		|	작성자");
 
 		for (int i = printArticles.size() - 1; i >= 0; i--) {
 			Article article = printArticles.get(i);
 
-			System.out.printf("%d	|	%s	|	%s	\n", article.id, article.title, article.regDate);
+			System.out.printf("%d	|	%s	|	%s	|	%d\n", article.id, article.title, article.regDate, article.memberId);
 		}
 	}
 
@@ -124,11 +124,17 @@ public class ArticleController extends Controller {
 		System.out.println("== 게시물 상세보기 ==");
 		System.out.printf("번호 : %d\n", foundArticle.id);
 		System.out.printf("작성일 : %s\n", foundArticle.regDate);
+		System.out.printf("작성자 : %d\n", foundArticle.memberId);
 		System.out.printf("제목 : %s\n", foundArticle.title);
 		System.out.printf("내용 : %s\n", foundArticle.body);
 	}
 	
 	private void doModify() {
+		if (loginedMember == null) {
+			System.out.println("로그인 상태가 아닙니다");
+			return;
+		}
+		
 		String[] cmdBits = cmd.split(" ");
 		
 		if (cmdBits.length == 2) {
@@ -146,6 +152,11 @@ public class ArticleController extends Controller {
 			return;
 		}
 
+		if (foundArticle.memberId != loginedMember.id) {
+			System.out.println("해당 게시물에 대한 권한이 없습니다");
+			return;
+		}
+		
 		System.out.println("== 게시물 수정 ==");
 		System.out.printf("수정할 제목 : ");
 		String title = sc.nextLine();
@@ -159,6 +170,11 @@ public class ArticleController extends Controller {
 	}
 	
 	private void doDelete() {
+		if (loginedMember == null) {
+			System.out.println("로그인 상태가 아닙니다");
+			return;
+		}
+		
 		String[] cmdBits = cmd.split(" ");
 		
 		if (cmdBits.length == 2) {
@@ -175,6 +191,11 @@ public class ArticleController extends Controller {
 			return;
 		}
 
+		if (foundArticle.memberId != loginedMember.id) {
+			System.out.println("해당 게시물에 대한 권한이 없습니다");
+			return;
+		}
+		
 		articles.remove(foundArticle);
 
 		System.out.printf("%d번 게시물이 삭제되었습니다\n", id);
