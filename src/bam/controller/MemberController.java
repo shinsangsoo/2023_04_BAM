@@ -11,13 +11,11 @@ public class MemberController extends Controller {
 	private List<Member> members;
 	private Scanner sc;
 	private int lastMemberId;
-	private Member loginedMember;
 	
 	public MemberController(List<Member> members, Scanner sc) {
 		this.members = members;
 		this.sc = sc;
 		this.lastMemberId = 0;
-		this.loginedMember = null;
 	}
 	
 	@Override
