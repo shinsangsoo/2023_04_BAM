@@ -46,7 +46,7 @@ public class ArticleController extends Controller {
 
 	private void doWrite() {
 		System.out.println("== 게시물 작성 ==");
-		int id = articleService.setArticleId();
+		int id = articleService.setLastId();
 		System.out.printf("제목 : ");
 		String title = sc.nextLine();
 		System.out.printf("내용 : ");

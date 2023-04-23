@@ -11,8 +11,8 @@ public class MemberService {
 		this.memberDao = new MemberDao();
 	}
 
-	public int setMemberId() {
-		return memberDao.setMemberId();
+	public int setLastId() {
+		return memberDao.setLastId();
 	}
 	
 	public void add(Member member) {

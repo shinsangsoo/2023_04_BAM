@@ -13,8 +13,8 @@ public class ArticleService {
 		articleDao = new ArticleDao();
 	}
 
-	public int setArticleId() {
-		return articleDao.setArticleId();
+	public int setLastId() {
+		return articleDao.setLastId();
 	}
 
 	public void add(Article article) {

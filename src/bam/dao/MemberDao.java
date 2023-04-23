@@ -6,23 +6,16 @@ import java.util.List;
 import bam.dto.Member;
 import bam.util.Util;
 
-public class MemberDao {
+public class MemberDao extends Dao {
 	private List<Member> members;
-	private int lastMemberId;
 
 	public MemberDao() {
 		this.members = new ArrayList<>();
-		this.lastMemberId = 0;
-	}
-
-	public int setMemberId() {
-		int id = lastMemberId + 1;
-		lastMemberId = id;
-		return id;
 	}
 
 	public void add(Member member) {
 		members.add(member);
+		lastId++;
 	}
 
 	public Member getMemberByLoginId(String loginId) {
@@ -46,14 +39,12 @@ public class MemberDao {
 	public void makeTestData() {
 		for (int i = 1; i <= 3; i++) {
 
-			int id = setMemberId();
-
 			String loginId = "test" + i;
 			String loginPw = "test" + i;
 			String name = "사용자" + i;
 
-			Member member = new Member(id, Util.getDateStr(), loginId, loginPw, name);
-			members.add(member);
+			Member member = new Member(setLastId(), Util.getDateStr(), loginId, loginPw, name);
+			add(member);
 		}
 	}
 }
