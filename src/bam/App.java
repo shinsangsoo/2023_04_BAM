@@ -1,31 +1,20 @@
 package bam;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import bam.controller.ArticleController;
 import bam.controller.Controller;
 import bam.controller.MemberController;
-import bam.dto.Article;
-import bam.dto.Member;
 
 public class App {
-	private List<Article> articles;
-	private List<Member> members;
-
-	public App() {
-		articles = new ArrayList<>();
-		members = new ArrayList<>();
-	}
 
 	public void run() {
 		System.out.println("== 프로그램 시작 ==");
 
 		Scanner sc = new Scanner(System.in);
 
-		MemberController memberController = new MemberController(members, sc);
-		ArticleController articleController = new ArticleController(articles, sc);
+		MemberController memberController = new MemberController(sc);
+		ArticleController articleController = new ArticleController(sc);
 
 		articleController.makeTestData();
 		memberController.makeTestData();
