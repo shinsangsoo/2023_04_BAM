@@ -1,5 +1,6 @@
 package bam.service;
 
+import bam.container.Container;
 import bam.dao.MemberDao;
 import bam.dto.Member;
 
@@ -8,7 +9,7 @@ public class MemberService {
 	private MemberDao memberDao;
 	
 	public MemberService(){
-		this.memberDao = new MemberDao();
+		this.memberDao = Container.memberDao;
 	}
 
 	public int setLastId() {

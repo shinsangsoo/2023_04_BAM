@@ -10,7 +10,7 @@ public class App {
 
 	public void run() {
 		System.out.println("== 프로그램 시작 ==");
-
+		
 		Scanner sc = new Scanner(System.in);
 
 		MemberController memberController = new MemberController(sc);

@@ -2,6 +2,7 @@ package bam.controller;
 
 import java.util.Scanner;
 
+import bam.container.Container;
 import bam.dto.Member;
 import bam.service.MemberService;
 import bam.util.Util;
@@ -12,8 +13,8 @@ public class MemberController extends Controller {
 	private MemberService memberService;
 	
 	public MemberController(Scanner sc) {
-		this.memberService = new MemberService();
 		this.sc = sc;
+		this.memberService = Container.memberService;
 	}
 	
 	@Override

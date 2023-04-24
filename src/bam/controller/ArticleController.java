@@ -3,6 +3,7 @@ package bam.controller;
 import java.util.List;
 import java.util.Scanner;
 
+import bam.container.Container;
 import bam.dto.Article;
 import bam.service.ArticleService;
 import bam.util.Util;
@@ -14,8 +15,8 @@ public class ArticleController extends Controller {
 	private ArticleService articleService;
 	
 	public ArticleController(Scanner sc) {
+		this.articleService = Container.articleService;
 		this.sc = sc;
-		this.articleService = new ArticleService();
 	}
 	
 	@Override
@@ -146,7 +147,6 @@ public class ArticleController extends Controller {
 			System.out.println("명령어를 확인해주세요");
 			return;
 		}
-		
 		int id = Integer.parseInt(cmdBits[2]);
 
 		Article foundArticle = articleService.getArticleById(id);
